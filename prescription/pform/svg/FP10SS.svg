@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="450" height="600" style="fill:rgb(200, 225, 181); stroke-width:1;stroke:rgb(0,0,0)" />
+<rect  width="146" height="36" x="19" y="118" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="243" height="31" x="81" y="547" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="120" y="18">Age</text>
+<rect  width="83" height="113" x="117" y="5" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(57,104,98)" />
+<text  x="203" y="18">Title, Forename, Surname &amp; Address</text>
+<rect  width="237" height="149" x="200" y="5" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="22" y="167">Endorsements</text>
+<rect  width="305" height="230" x="19" y="154" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="22" y="397">Signature of Prescriber</text>
+<rect  width="230" height="50" x="19" y="384" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="252" y="397">Date</text>
+<rect  width="75" height="50" x="249" y="384" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="114" height="280" x="324" y="154" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="23" height="280" x="415" y="154" style="fill:rgb(12, 134, 6); stroke-width:0.0; stroke-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="243" height="113" x="81" y="434" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; stroke:rgb(0,0,0)" />
+<text  x="203" y="140">NHS Number:</text>
+<rect  width="90" height="19" x="200" y="127" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="41" height="39" x="18" y="505" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="17" y="448">For</text>
+<rect  width="28" height="17" x="14" y="435" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="16" y="461">dispenser</text>
+<rect  width="64" height="16" x="13" y="448" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="16" y="475">No. of</text>
+<rect  width="54" height="13" x="13" y="462" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="16" y="487">Prescns.</text>
+<rect  width="58" height="16" x="13" y="474" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="16" y="499">on form</text>
+<rect  width="50" height="50" x="13" y="486" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="120" y="70">D.o.B</text>
+<rect  width="39" height="15" x="117" y="57" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="19" y="132">No. of days' treatment</text>
+<rect  width="98" height="15" x="16" y="119" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="237" y="566">FP10SS0608</text>
+<rect  width="85" height="17" x="234" y="553" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="17" y="153">N.B. ensure dose is stated</text>
+<rect  width="151" height="12" x="14" y="140" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<rect  width="35" height="36" x="165" y="118" style="fill:rgb(255, 255, 255); stroke-width:1.0; stroke-opacity: 1; fill-opacity: 0; stroke:rgb(0,0,0)" />
+<text  x="13" y="24">Pharmacy Stamp</text>
+<rect  width="101" height="60" x="10" y="11" style="fill:rgb(255, 255, 255); stroke-width:0.0; stroke-opacity: 0; fill-opacity: 0; stroke:rgb(0,0,0)" />
+</svg>
