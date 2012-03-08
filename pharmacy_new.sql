@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2012 at 04:06 PM
+-- Generation Time: Mar 08, 2012 at 05:22 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -72,12 +72,20 @@ CREATE TABLE IF NOT EXISTS `question` (
 
 CREATE TABLE IF NOT EXISTS `scenario` (
   `ScenarioID` int(11) NOT NULL AUTO_INCREMENT,
+  `scenarioName` varchar(255) NOT NULL,
   `ScenarioTypeID` int(11) NOT NULL,
   `Feedback` text NOT NULL,
   `mark` int(3) NOT NULL,
   PRIMARY KEY (`ScenarioID`),
   KEY `ScenarioTypeID` (`ScenarioTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `scenario`
+--
+
+INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`) VALUES
+(2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100);
 
 -- --------------------------------------------------------
 
@@ -99,11 +107,19 @@ CREATE TABLE IF NOT EXISTS `scenariocollection` (
 --
 
 CREATE TABLE IF NOT EXISTS `scenariotype` (
-  `scenarioTypeID` int(11) NOT NULL,
+  `scenarioTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`scenarioTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `scenariotype`
+--
+
+INSERT INTO `scenariotype` (`scenarioTypeID`, `name`, `description`) VALUES
+(1, 'TomsfirstType', 'testing stuff'),
+(2, 'TomsfirstType', 'testing type');
 
 -- --------------------------------------------------------
 
@@ -113,14 +129,22 @@ CREATE TABLE IF NOT EXISTS `scenariotype` (
 
 CREATE TABLE IF NOT EXISTS `test` (
   `testID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `testName` varchar(255) NOT NULL DEFAULT 'testName',
   `creatorID` int(11) NOT NULL,
   `creationTimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `releaseTime` datetime NOT NULL,
-  `expiray time` datetime NOT NULL,
+  `releaseTime` datetime DEFAULT NULL,
+  `expiray time` datetime DEFAULT NULL,
   `Feedback` text NOT NULL,
   `testTypeID` int(11) NOT NULL,
   PRIMARY KEY (`testID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`testID`, `testName`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
+(1, 'TomsFirstTest', 0, '2012-03-08 17:18:06', NULL, NULL, 'my Test Feedback', 0);
 
 -- --------------------------------------------------------
 
