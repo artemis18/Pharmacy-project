@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2012 at 05:22 PM
+-- Generation Time: Mar 09, 2012 at 10:44 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -23,10 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `completedtest`
+-- Table structure for table `completed_test`
 --
 
-CREATE TABLE IF NOT EXISTS `completedtest` (
+DROP TABLE IF EXISTS `completed_test`;
+CREATE TABLE IF NOT EXISTS `completed_test` (
   `testID` int(11) unsigned NOT NULL,
   `startTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `finishTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -42,11 +43,20 @@ CREATE TABLE IF NOT EXISTS `completedtest` (
 -- Table structure for table `dummy_user`
 --
 
+DROP TABLE IF EXISTS `dummy_user`;
 CREATE TABLE IF NOT EXISTS `dummy_user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(75) NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `dummy_user`
+--
+
+INSERT INTO `dummy_user` (`userID`, `Name`) VALUES
+(1, 'Tom Jones'),
+(2, 'Purav Upadhyay');
 
 -- --------------------------------------------------------
 
@@ -54,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `dummy_user` (
 -- Table structure for table `question`
 --
 
+DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
   `ScenarioID` int(11) NOT NULL,
   `questionText` varchar(255) NOT NULL,
@@ -70,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- Table structure for table `scenario`
 --
 
+DROP TABLE IF EXISTS `scenario`;
 CREATE TABLE IF NOT EXISTS `scenario` (
   `ScenarioID` int(11) NOT NULL AUTO_INCREMENT,
   `scenarioName` varchar(255) NOT NULL,
@@ -78,35 +90,47 @@ CREATE TABLE IF NOT EXISTS `scenario` (
   `mark` int(3) NOT NULL,
   PRIMARY KEY (`ScenarioID`),
   KEY `ScenarioTypeID` (`ScenarioTypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `scenario`
 --
 
 INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`) VALUES
-(2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100);
+(2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100),
+(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33),
+(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `scenariocollection`
+-- Table structure for table `scenario_collection`
 --
 
-CREATE TABLE IF NOT EXISTS `scenariocollection` (
+DROP TABLE IF EXISTS `scenario_collection`;
+CREATE TABLE IF NOT EXISTS `scenario_collection` (
   `ScenarioID` int(11) NOT NULL,
   `testID` int(11) unsigned NOT NULL,
   KEY `ScenarioID` (`ScenarioID`),
   KEY `testID` (`testID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `scenario_collection`
+--
+
+INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
+(2, 2),
+(3, 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `scenariotype`
+-- Table structure for table `scenario_type`
 --
 
-CREATE TABLE IF NOT EXISTS `scenariotype` (
+DROP TABLE IF EXISTS `scenario_type`;
+CREATE TABLE IF NOT EXISTS `scenario_type` (
   `scenarioTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -114,10 +138,10 @@ CREATE TABLE IF NOT EXISTS `scenariotype` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `scenariotype`
+-- Dumping data for table `scenario_type`
 --
 
-INSERT INTO `scenariotype` (`scenarioTypeID`, `name`, `description`) VALUES
+INSERT INTO `scenario_type` (`scenarioTypeID`, `name`, `description`) VALUES
 (1, 'TomsfirstType', 'testing stuff'),
 (2, 'TomsfirstType', 'testing type');
 
@@ -127,47 +151,72 @@ INSERT INTO `scenariotype` (`scenarioTypeID`, `name`, `description`) VALUES
 -- Table structure for table `test`
 --
 
+DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `testID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `testName` varchar(255) NOT NULL DEFAULT 'testName',
-  `creatorID` int(11) NOT NULL,
+  `creatorID` int(11) DEFAULT NULL,
   `creationTimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `releaseTime` datetime DEFAULT NULL,
   `expiray time` datetime DEFAULT NULL,
-  `Feedback` text NOT NULL,
+  `Feedback` text,
   `testTypeID` int(11) NOT NULL,
-  PRIMARY KEY (`testID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`testID`),
+  KEY `creatorID` (`creatorID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `test`
 --
 
 INSERT INTO `test` (`testID`, `testName`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
-(1, 'TomsFirstTest', 0, '2012-03-08 17:18:06', NULL, NULL, 'my Test Feedback', 0);
+(2, 'TomsFirstTest', 1, '2012-03-09 10:35:05', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
+(3, 'TomsSecondTest', 1, '2012-03-09 10:35:45', NULL, NULL, 'feedback for second test', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testcollection`
+-- Table structure for table `test_collection`
 --
 
-CREATE TABLE IF NOT EXISTS `testcollection` (
+DROP TABLE IF EXISTS `test_collection`;
+CREATE TABLE IF NOT EXISTS `test_collection` (
   `testID` int(11) unsigned NOT NULL,
   `userID` int(6) unsigned NOT NULL,
   KEY `testID` (`testID`),
   KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_type`
+--
+
+DROP TABLE IF EXISTS `test_type`;
+CREATE TABLE IF NOT EXISTS `test_type` (
+  `Type` varchar(255) NOT NULL,
+  `TypeID` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`TypeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_type`
+--
+
+INSERT INTO `test_type` (`Type`, `TypeID`) VALUES
+('Practice', 0),
+('Assessed', 1);
+
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `completedtest`
+-- Constraints for table `completed_test`
 --
-ALTER TABLE `completedtest`
-  ADD CONSTRAINT `completedtest_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `completed_test`
+  ADD CONSTRAINT `completed_test_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `question`
@@ -179,20 +228,26 @@ ALTER TABLE `question`
 -- Constraints for table `scenario`
 --
 ALTER TABLE `scenario`
-  ADD CONSTRAINT `scenario_ibfk_1` FOREIGN KEY (`ScenarioTypeID`) REFERENCES `scenariotype` (`scenarioTypeID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scenario_ibfk_1` FOREIGN KEY (`ScenarioTypeID`) REFERENCES `scenario_type` (`scenarioTypeID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `scenariocollection`
+-- Constraints for table `scenario_collection`
 --
-ALTER TABLE `scenariocollection`
-  ADD CONSTRAINT `scenariocollection_ibfk_1` FOREIGN KEY (`ScenarioID`) REFERENCES `scenario` (`ScenarioID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scenariocollection_ibfk_2` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `scenario_collection`
+  ADD CONSTRAINT `scenario_collection_ibfk_1` FOREIGN KEY (`ScenarioID`) REFERENCES `scenario` (`ScenarioID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `scenario_collection_ibfk_2` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `testcollection`
+-- Constraints for table `test`
 --
-ALTER TABLE `testcollection`
-  ADD CONSTRAINT `testcollection_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `test`
+  ADD CONSTRAINT `test_ibfk_1` FOREIGN KEY (`creatorID`) REFERENCES `dummy_user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `test_collection`
+--
+ALTER TABLE `test_collection`
+  ADD CONSTRAINT `test_collection_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
