@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.4.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2012 at 10:44 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Mar 10, 2012 at 03:42 PM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `completed_test`
 --
 
-DROP TABLE IF EXISTS `completed_test`;
 CREATE TABLE IF NOT EXISTS `completed_test` (
   `testID` int(11) unsigned NOT NULL,
   `startTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -43,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `completed_test` (
 -- Table structure for table `dummy_user`
 --
 
-DROP TABLE IF EXISTS `dummy_user`;
 CREATE TABLE IF NOT EXISTS `dummy_user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(75) NOT NULL,
@@ -64,7 +62,6 @@ INSERT INTO `dummy_user` (`userID`, `Name`) VALUES
 -- Table structure for table `question`
 --
 
-DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
   `ScenarioID` int(11) NOT NULL,
   `questionText` varchar(255) NOT NULL,
@@ -81,25 +78,28 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- Table structure for table `scenario`
 --
 
-DROP TABLE IF EXISTS `scenario`;
 CREATE TABLE IF NOT EXISTS `scenario` (
   `ScenarioID` int(11) NOT NULL AUTO_INCREMENT,
   `scenarioName` varchar(255) NOT NULL,
   `ScenarioTypeID` int(11) NOT NULL,
   `Feedback` text NOT NULL,
   `mark` int(3) NOT NULL,
+  `published` enum('yes','no') NOT NULL,
   PRIMARY KEY (`ScenarioID`),
   KEY `ScenarioTypeID` (`ScenarioTypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `scenario`
 --
 
-INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`) VALUES
-(2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100),
-(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33),
-(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33);
+INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`, `published`) VALUES
+(2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100, 'yes'),
+(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'yes'),
+(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'no'),
+(5, 'Example Scenario', 2, 'Feedback...', 100, 'no'),
+(7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no'),
+(8, 'Unpublished Scenario2', 1, 'Feedback on this scenario...', 55, 'no');
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,6 @@ INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedbac
 -- Table structure for table `scenario_collection`
 --
 
-DROP TABLE IF EXISTS `scenario_collection`;
 CREATE TABLE IF NOT EXISTS `scenario_collection` (
   `ScenarioID` int(11) NOT NULL,
   `testID` int(11) unsigned NOT NULL,
@@ -129,7 +128,6 @@ INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
 -- Table structure for table `scenario_type`
 --
 
-DROP TABLE IF EXISTS `scenario_type`;
 CREATE TABLE IF NOT EXISTS `scenario_type` (
   `scenarioTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -151,7 +149,6 @@ INSERT INTO `scenario_type` (`scenarioTypeID`, `name`, `description`) VALUES
 -- Table structure for table `test`
 --
 
-DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `testID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `testName` varchar(255) NOT NULL DEFAULT 'testName',
@@ -179,7 +176,6 @@ INSERT INTO `test` (`testID`, `testName`, `creatorID`, `creationTimeStamp`, `rel
 -- Table structure for table `test_collection`
 --
 
-DROP TABLE IF EXISTS `test_collection`;
 CREATE TABLE IF NOT EXISTS `test_collection` (
   `testID` int(11) unsigned NOT NULL,
   `userID` int(6) unsigned NOT NULL,
@@ -193,7 +189,6 @@ CREATE TABLE IF NOT EXISTS `test_collection` (
 -- Table structure for table `test_type`
 --
 
-DROP TABLE IF EXISTS `test_type`;
 CREATE TABLE IF NOT EXISTS `test_type` (
   `Type` varchar(255) NOT NULL,
   `TypeID` int(11) unsigned NOT NULL,
