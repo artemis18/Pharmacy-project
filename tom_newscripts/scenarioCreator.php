@@ -50,16 +50,30 @@
 	}
 	</style>
 	<head>
+		
 		<title> Scenario Creator</title>		
 	</head>
 	<body>	
+	<script type="text/javascript">
+			function displayQuestionForm () {
+				//document.write("function called");
+				//switch (questionType){
+				//case: "multiple choice"
+				//run function to render multiple choice form`
+				alert("test");
+				//break;
+				}
+			}
+		</script>
 	<div id="container">
 		<h1> Scenario Creator</h1>
 		<div id = "scenarioname">
 			<form>
 				<label> scenario name: <input type = "text" name="scenarioName"/> </label><br/>
 				<label> select prescription form <br/>
-					<textArea name = "prescriptions"> </textarea> </label>
+				<textArea name = "prescriptions"> </textarea> </label>
+				 <input type = "submit" value = "save" />
+
 			</form>
 		</div>
 		 <div id= "prescriptionForm" >
@@ -79,15 +93,19 @@
 		 <!-- something to display question form(s)-->
 		 <!-- end questions forms-->
 		 <div id= "addQuestionForm">
-		 <form>
+		 <form method = "post">
 			 <label> Select question type: 
-				 <select>
-				 <option> Multiple choice</option>
+				 <select name = questionType>
+				 <option> Multiple_choice</option>
+				 <option> True_False</option>
 				 </select>
 			</label>
-			 <input type = "submit" value = "add" />
+			 <input type = "button" value = "add" onclick = "displayQuestionForm()" />
 		 </form>
 		 </div>
 	 </div>
+	 <script type = "text/javascript">
+		displayQuestionForm();
+		</script>
 	</body>
 </html>
