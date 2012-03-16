@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2012 at 03:42 PM
+-- Generation Time: Mar 16, 2012 at 12:28 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `scenario` (
   `published` enum('yes','no') NOT NULL,
   PRIMARY KEY (`ScenarioID`),
   KEY `ScenarioTypeID` (`ScenarioTypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `scenario`
@@ -95,11 +95,10 @@ CREATE TABLE IF NOT EXISTS `scenario` (
 
 INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`, `published`) VALUES
 (2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100, 'yes'),
-(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'yes'),
-(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'no'),
-(5, 'Example Scenario', 2, 'Feedback...', 100, 'no'),
-(7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no'),
-(8, 'Unpublished Scenario2', 1, 'Feedback on this scenario...', 55, 'no');
+(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'no'),
+(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'yes'),
+(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'yes'),
+(7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no');
 
 -- --------------------------------------------------------
 
@@ -119,8 +118,9 @@ CREATE TABLE IF NOT EXISTS `scenario_collection` (
 --
 
 INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
-(2, 2),
-(3, 2);
+(4, 4),
+(5, 2),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -152,6 +152,7 @@ INSERT INTO `scenario_type` (`scenarioTypeID`, `name`, `description`) VALUES
 CREATE TABLE IF NOT EXISTS `test` (
   `testID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `testName` varchar(255) NOT NULL DEFAULT 'testName',
+  `description` text NOT NULL,
   `creatorID` int(11) DEFAULT NULL,
   `creationTimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `releaseTime` datetime DEFAULT NULL,
@@ -160,15 +161,17 @@ CREATE TABLE IF NOT EXISTS `test` (
   `testTypeID` int(11) NOT NULL,
   PRIMARY KEY (`testID`),
   KEY `creatorID` (`creatorID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `test`
 --
 
-INSERT INTO `test` (`testID`, `testName`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
-(2, 'TomsFirstTest', 1, '2012-03-09 10:35:05', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
-(3, 'TomsSecondTest', 1, '2012-03-09 10:35:45', NULL, NULL, 'feedback for second test', 0);
+INSERT INTO `test` (`testID`, `testName`, `description`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
+(2, 'TomsFirstTest', 'This test is about Unit10. Here you will be able to...', 1, '2012-03-16 12:18:24', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
+(3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on the questions such as...', 1, '2012-03-16 12:19:48', NULL, NULL, 'feedback for second test', 0),
+(4, 'PuravsFirstTest', 'This test is about Unit9. Here you will be tested on the questions such as...', 1, '2012-03-16 12:20:06', '2012-03-09 00:00:00', '2012-03-16 00:00:00', 'Feedback....', 1),
+(5, 'PuravsSecondTest', 'This test is about Unit7. Here you will be tested on the questions such as...', 2, '2012-03-16 12:20:39', NULL, NULL, 'Feedback..', 0);
 
 -- --------------------------------------------------------
 
