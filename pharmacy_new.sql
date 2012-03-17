@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2012 at 12:28 PM
+-- Generation Time: Mar 17, 2012 at 05:58 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS `scenario` (
 
 INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`, `published`) VALUES
 (2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100, 'yes'),
-(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'no'),
-(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'yes'),
-(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'yes'),
+(3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'yes'),
+(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'no'),
+(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'no'),
 (7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no');
 
 -- --------------------------------------------------------
@@ -118,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `scenario_collection` (
 --
 
 INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
-(4, 4),
-(5, 2),
-(2, 3);
+(2, 3),
+(3, 2),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -158,10 +158,10 @@ CREATE TABLE IF NOT EXISTS `test` (
   `releaseTime` datetime DEFAULT NULL,
   `expiray time` datetime DEFAULT NULL,
   `Feedback` text,
-  `testTypeID` int(11) NOT NULL,
+  `testTypeID` int(11) DEFAULT NULL,
   PRIMARY KEY (`testID`),
   KEY `creatorID` (`creatorID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `test`
@@ -169,9 +169,11 @@ CREATE TABLE IF NOT EXISTS `test` (
 
 INSERT INTO `test` (`testID`, `testName`, `description`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
 (2, 'TomsFirstTest', 'This test is about Unit10. Here you will be able to...', 1, '2012-03-16 12:18:24', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
-(3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on the questions such as...', 1, '2012-03-16 12:19:48', NULL, NULL, 'feedback for second test', 0),
-(4, 'PuravsFirstTest', 'This test is about Unit9. Here you will be tested on the questions such as...', 1, '2012-03-16 12:20:06', '2012-03-09 00:00:00', '2012-03-16 00:00:00', 'Feedback....', 1),
-(5, 'PuravsSecondTest', 'This test is about Unit7. Here you will be tested on the questions such as...', 2, '2012-03-16 12:20:39', NULL, NULL, 'Feedback..', 0);
+(3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on the questions such as', 1, '2012-03-17 01:26:41', NULL, NULL, 'feedback for second test', 0),
+(5, 'PuravsDemoTest', 'A a first year pharmacy student you will be tested on the basics of a prescription.', 2, '2012-03-17 00:57:29', NULL, NULL, 'Feedback..', 0),
+(17, 'PuravsDemoTest2', 'This tests you on the ability of finding mistakes in a prescription.', 2, '2012-03-17 17:26:15', '2013-03-07 00:00:00', NULL, '', 0),
+(18, 'PuravsDemoTest3', 'The test has three different scenarios which will test your ability on prescription identification. ', 2, '2012-03-17 17:26:43', '2012-03-31 00:00:00', NULL, '', 0),
+(19, 'PuravsDemoTest4', 'This test contains three demo scenarios', 2, '2012-03-17 16:23:49', NULL, NULL, '', 0);
 
 -- --------------------------------------------------------
 
