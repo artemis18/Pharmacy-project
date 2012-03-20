@@ -2,7 +2,6 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html>
 	<style>
 	#container{
 	position:absolute;
@@ -48,23 +47,52 @@
 	padding:15px;
 	margin:5px;
 	}
+	#Qformdiv{
+	position: relative;
+	border-width:2px;
+	border-style:dotted;
+	border-color:black;
+	width: 715px;
+	padding:15px;
+	margin-top:5px;
+	}
+	#questionForm{
+	position:relative;
+	width: 750px;
+	overflow: auto;
+	margin:5px;
+	}
 	</style>
 	<head>
 		
-		<title> Scenario Creator</title>		
+		<title> Scenario Creator</title>	
+		<script type="text/javascript" language="javascript">   
+			function createform(){
+				$selection = document.getElementById("questionType").selectedIndex;
+				$selectionText = document.getElementByID("questionType")[$selection].text;
+			
+				$form = '<form> ';
+				$form += '<label>Question text: <input type = "text" name = "text area"></label>';
+				$form += '<label>questionType: <input type = "text" name = "qType" disabled = "true"'; 
+				$form += 'value ="';
+				$form += $selectionText;
+				$form += '"';
+				$form += '/></label>';
+				$form += '</form>';
+			
+			return $form;
+		}
+		function questionCreate() {       
+        var createQform = document.createElement("div");
+        createQform.id = "Qformdiv";
+        createQform.innerHTML = createform(); 
+        document.getElementById("questionForm").appendChild(createQform);
+		}
+
+</script>		
 	</head>
 	<body>	
-	<script type="text/javascript">
-			function displayQuestionForm () {
-				//document.write("function called");
-				//switch (questionType){
-				//case: "multiple choice"
-				//run function to render multiple choice form`
-				alert("test");
-				//break;
-				}
-			}
-		</script>
+
 	<div id="container">
 		<h1> Scenario Creator</h1>
 		<div id = "scenarioname">
@@ -89,23 +117,22 @@
 			 <label> additional details <br/><textarea 
 			 rows="10" cols = "40" name = "additional"> </textarea> </label>
 			 </form>
-		 </div>
+		</div>
+		 <div id = "questionForm">
 		 <!-- something to display question form(s)-->
 		 <!-- end questions forms-->
+		 </div>
 		 <div id= "addQuestionForm">
-		 <form method = "post">
+		 <form name = "addQuestion" method = "post">
 			 <label> Select question type: 
-				 <select name = questionType>
+				 <select id = "questionType">
 				 <option> Multiple_choice</option>
 				 <option> True_False</option>
 				 </select>
 			</label>
-			 <input type = "button" value = "add" onclick = "displayQuestionForm()" />
+			 <input type = "button" value = "add" onclick = "questionCreate()" />
 		 </form>
 		 </div>
 	 </div>
-	 <script type = "text/javascript">
-		displayQuestionForm();
-		</script>
 	</body>
 </html>
