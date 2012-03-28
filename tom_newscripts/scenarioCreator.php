@@ -66,18 +66,24 @@
 	<head>
 		
 		<title> Scenario Creator</title>	
-		<script type="text/javascript" language="javascript">   
+		<script type="text/javascript" language="javascript">  
+			function saveQuestion(){
+			alert("question saving");
+			}		
+			
 			function createform(){
-				$selection = document.getElementById("questionType").selectedIndex;
-				$selectionText = document.getElementByID("questionType")[$selection].text;
+				var selection = document.getElementById("questionType");
+				var selectionText = selection[selection.selectedIndex].text;
 			
 				$form = '<form> ';
 				$form += '<label>Question text: <input type = "text" name = "text area"></label>';
 				$form += '<label>questionType: <input type = "text" name = "qType" disabled = "true"'; 
 				$form += 'value ="';
-				$form += $selectionText;
+				$form += selectionText;
 				$form += '"';
 				$form += '/></label>';
+				$form += '<input type = "button" value = "save" onclick = "saveQuestion()"/>';
+				$form += '<input type = "button" value = "edit" onclick = "editquestion()"/>';
 				$form += '</form>';
 			
 			return $form;
