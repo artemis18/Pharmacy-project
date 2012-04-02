@@ -67,35 +67,57 @@
 		
 		<title> Scenario Creator</title>	
 		<script type="text/javascript" language="javascript">  
-			function saveQuestion(){
-			alert("question saving");
-			}		
+			function saveQuestion($Qtype ,$Qtext ){
+				    {//ajax
+						var xmlhttp;
+			
+						if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+						}
+						else {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						
+						xmlhttp.onreadystatechange=function(){
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+							// action on completion of processing
+						  }
+						}
+						queryString = "?QText = " + $Qtext + "QType = " + qType;
+						xmlhttp.open("GET", "saveQuestion.php" + queryString, true);
+						xmlhttp.send(null);
+					}
+					
+			}
+			function editQuestion(Qtype){
+			}
 			
 			function createform(){
 				var selection = document.getElementById("questionType");
 				var selectionText = selection[selection.selectedIndex].text;
 			
 				$form = '<form> ';
-				$form += '<label>Question text: <input type = "text" name = "text area"></label>';
+				$form += '<label>Question text: <input type = "text" name = "qText"></label>';
 				$form += '<label>questionType: <input type = "text" name = "qType" disabled = "true"'; 
 				$form += 'value ="';
 				$form += selectionText;
 				$form += '"';
 				$form += '/></label>';
-				$form += '<input type = "button" value = "save" onclick = "saveQuestion()"/>';
-				$form += '<input type = "button" value = "edit" onclick = "editquestion()"/>';
+				$form += '<input type = "button" value = "save" onclick = "saveQuestion(qType.text,qText.text )"/>';
+				$form += '<input type = "button" value = "edit" onclick = "editQuestion(qType.text)"/>';
 				$form += '</form>';
 			
 			return $form;
-		}
-		function questionCreate() {       
-        var createQform = document.createElement("div");
-        createQform.id = "Qformdiv";
-        createQform.innerHTML = createform(); 
-        document.getElementById("questionForm").appendChild(createQform);
-		}
+			}
+			
+			function questionCreate() {       
+			var createQform = document.createElement("div");
+			createQform.id = "Qformdiv";
+			createQform.innerHTML = createform(); 
+			document.getElementById("questionForm").appendChild(createQform);
+			}
 
-</script>		
+		</script>		
 	</head>
 	<body>	
 
