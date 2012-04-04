@@ -83,13 +83,20 @@
 							// action on completion of processing
 						  }
 						}
-						queryString = "?QText = " + $Qtext + "QType = " + qType;
+						queryString = "?QText = " + $Qtext + "&QType = " + qType;
 						xmlhttp.open("GET", "saveQuestion.php" + queryString, true);
 						xmlhttp.send(null);
 					}
 					
 			}
 			function editQuestion(Qtype){
+				switch(Qtype){
+				case "Multiple_choice" : alert("Multiple_choice load"); //window.open("test.php");
+				break;
+				case "True_False" :alert("True_False load"); //window.open("");
+				break;
+				default: alert("error");
+				}
 			}
 			
 			function createform(){
@@ -103,8 +110,8 @@
 				$form += selectionText;
 				$form += '"';
 				$form += '/></label>';
-				$form += '<input type = "button" value = "save" onclick = "saveQuestion(qType.text,qText.text )"/>';
-				$form += '<input type = "button" value = "edit" onclick = "editQuestion(qType.text)"/>';
+				$form += '<input type = "button" value = "save" onclick = "saveQuestion(qType.value,qText.value)"/>';
+				$form += '<input type = "button" value = "edit" onclick = "editQuestion(qType.value)"/>';
 				$form += '</form>';
 			
 			return $form;
