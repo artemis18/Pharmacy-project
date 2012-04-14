@@ -1,5 +1,5 @@
 <?php
-	$question = "";
+	$question;
 	$answer;
 	$ansFeedback = "";
 	$numOptions = "";
