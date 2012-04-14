@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2012 at 05:58 PM
+-- Generation Time: Apr 14, 2012 at 06:59 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -59,17 +59,40 @@ INSERT INTO `dummy_user` (`userID`, `Name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
+-- Table structure for table `multichoice`
 --
 
-CREATE TABLE IF NOT EXISTS `question` (
+CREATE TABLE IF NOT EXISTS `multichoice` (
+  `multichoice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_text` text NOT NULL,
+  `option1` varchar(50) NOT NULL,
+  `option2` varchar(50) NOT NULL,
+  `option3` varchar(50) NOT NULL,
+  `option4` varchar(50) NOT NULL,
+  `answer` varchar(50) NOT NULL,
+  `feedback1` text NOT NULL,
+  `feedback2` text NOT NULL,
+  `feedback3` text NOT NULL,
+  `feedback4` text NOT NULL,
+  `ansFeedback` text NOT NULL,
+  `numbering` varchar(25) NOT NULL,
+  `orientation` varchar(25) NOT NULL,
+  PRIMARY KEY (`multichoice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_collection`
+--
+
+CREATE TABLE IF NOT EXISTS `question_collection` (
   `ScenarioID` int(11) NOT NULL,
-  `questionText` varchar(255) NOT NULL,
-  `feedBackText` text NOT NULL,
-  `questionID` int(11) unsigned NOT NULL,
-  `marks` int(2) unsigned NOT NULL,
-  PRIMARY KEY (`questionID`),
-  KEY `ScenarioID` (`ScenarioID`)
+  `truefalse_id` int(11) NOT NULL,
+  `multichoice_id` int(11) NOT NULL,
+  KEY `ScenarioID` (`ScenarioID`),
+  KEY `truefalse_id` (`truefalse_id`),
+  KEY `multichoice_id` (`multichoice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,8 +119,8 @@ CREATE TABLE IF NOT EXISTS `scenario` (
 INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedback`, `mark`, `published`) VALUES
 (2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100, 'yes'),
 (3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'yes'),
-(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'no'),
-(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'no'),
+(4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'yes'),
+(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'yes'),
 (7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no');
 
 -- --------------------------------------------------------
@@ -120,7 +143,9 @@ CREATE TABLE IF NOT EXISTS `scenario_collection` (
 INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
 (2, 3),
 (3, 2),
-(2, 2);
+(2, 2),
+(4, 5),
+(5, 5);
 
 -- --------------------------------------------------------
 
@@ -161,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `testTypeID` int(11) DEFAULT NULL,
   PRIMARY KEY (`testID`),
   KEY `creatorID` (`creatorID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `test`
@@ -170,10 +195,11 @@ CREATE TABLE IF NOT EXISTS `test` (
 INSERT INTO `test` (`testID`, `testName`, `description`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
 (2, 'TomsFirstTest', 'This test is about Unit10. Here you will be able to...', 1, '2012-03-16 12:18:24', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
 (3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on the questions such as', 1, '2012-03-17 01:26:41', NULL, NULL, 'feedback for second test', 0),
-(5, 'PuravsDemoTest', 'A a first year pharmacy student you will be tested on the basics of a prescription.', 2, '2012-03-17 00:57:29', NULL, NULL, 'Feedback..', 0),
+(5, 'PuravsDemoTest1', 'A a first year pharmacy student you will be tested on the basics of a prescription.', 2, '2012-03-17 22:02:48', NULL, NULL, 'Feedback..', 0),
 (17, 'PuravsDemoTest2', 'This tests you on the ability of finding mistakes in a prescription.', 2, '2012-03-17 17:26:15', '2013-03-07 00:00:00', NULL, '', 0),
 (18, 'PuravsDemoTest3', 'The test has three different scenarios which will test your ability on prescription identification. ', 2, '2012-03-17 17:26:43', '2012-03-31 00:00:00', NULL, '', 0),
-(19, 'PuravsDemoTest4', 'This test contains three demo scenarios', 2, '2012-03-17 16:23:49', NULL, NULL, '', 0);
+(19, 'PuravsDemoTest4', 'This test contains three demo scenarios.', 2, '2012-03-17 21:32:42', NULL, NULL, '', 0),
+(37, 'PuravsDemoTest5', 'The test has three different scenarios which will test your ability on prescription identification. ', 2, '2012-03-20 01:08:15', NULL, NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -208,6 +234,20 @@ INSERT INTO `test_type` (`Type`, `TypeID`) VALUES
 ('Practice', 0),
 ('Assessed', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `truefalse`
+--
+
+CREATE TABLE IF NOT EXISTS `truefalse` (
+  `truefalse_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_text` varchar(50) NOT NULL,
+  `answer` text NOT NULL,
+  `feedback` text NOT NULL,
+  PRIMARY KEY (`truefalse_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Constraints for dumped tables
 --
@@ -219,10 +259,12 @@ ALTER TABLE `completed_test`
   ADD CONSTRAINT `completed_test_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `question`
+-- Constraints for table `question_collection`
 --
-ALTER TABLE `question`
-  ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`ScenarioID`) REFERENCES `scenario` (`ScenarioID`);
+ALTER TABLE `question_collection`
+  ADD CONSTRAINT `question_collection_ibfk_3` FOREIGN KEY (`multichoice_id`) REFERENCES `multichoice` (`multichoice_id`),
+  ADD CONSTRAINT `question_collection_ibfk_1` FOREIGN KEY (`ScenarioID`) REFERENCES `scenario` (`ScenarioID`),
+  ADD CONSTRAINT `question_collection_ibfk_2` FOREIGN KEY (`truefalse_id`) REFERENCES `truefalse` (`truefalse_id`);
 
 --
 -- Constraints for table `scenario`
