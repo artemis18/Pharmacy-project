@@ -2,37 +2,6 @@
 <head>
 <title>Multiple Choice</title>
 	<script type="text/javascript">
-	function options()
-	{	
-		var i = 0;
-		for(i = 0; i<5; i++){
-		//create radio buttons
-		var area = document.getElementById("questionArea");
-		var radio = document.createElement("input");
-		radio.type = "radio";
-		radio.name = "options";
-		//Creating labels
-		var optionLabel = document.createTextNode("Option");
-		var feedbackLabel = document.createTextNode("Feedback");
-		//Creating text boxes
-		var optionTextBox = document.createElement("input");
-		optionTextBox.type = "text";
-		optionTextBox.name = "option"+i;
-		var feedbackTextBox = document.createElement("input"); 
-		feedbackTextBox.type = "text";
-		feedbackTextBox.name = "feedback"+i;	
-		//Adding a line break
-		var lineBreak = document.createElement("br");
-		//Appending the elements to the web document
-		area.appendChild(radio);
-		area.appendChild(optionLabel);
-		area.appendChild(optionTextBox);
-		area.appendChild(feedbackLabel);
-		area.appendChild(feedbackTextBox);
-		area.appendChild(lineBreak);
-		}
-	}
-	</script>
 </head>
 
 <h2>Multiple Choice Question</h2>
