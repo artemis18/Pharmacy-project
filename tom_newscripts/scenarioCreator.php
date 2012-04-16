@@ -125,7 +125,7 @@
 				$form += selectionText;
 				$form += '"';
 				$form += '/></label>';
-				$form += '<input type = "button" value = "save" onclick = "saveQuestion(qType.value,qText.value)"/>';
+				$form += '<input type = "button" value = "save"disabled = "true" = "saveQuestion(qType.value,qText.value)"/>';
 				$form += '<input type = "button" value = "edit" onclick = "editQuestion(qType.value)"/>';
 				$form += '</form>';
 			
