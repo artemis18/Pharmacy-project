@@ -1,5 +1,5 @@
 <?php
-	$question;
+	$question = "";
 	$answer;
 	$ansFeedback = "";
 	$numOptions = "";
@@ -29,6 +29,20 @@
 		echo $answer;
 		echo $ansFeedback;
 		echo "<br/>";
+		printAnswerOptions($numOptions);
+		numberingOrientation($ansNumbring, $ansOrientation);
+	}
+	echo '<br/><input type="button" value="Go Back" onclick="history.go(-1)"><br/>';
+	
+	function numberingOrientation($ansNumbring, $ansOrientation)
+	{
+		echo $ansNumbring;
+		echo "<br/>";
+		echo $ansOrientation;
+	}
+	
+	function printAnswerOptions($numOptions)
+	{
 		for($i=2;$i<=$numOptions;$i++) {
 			$option = "Option".$i;
 			$feedback = "Feedback".$i;
@@ -36,9 +50,5 @@
 			echo $_POST["$feedback"];
 			echo "</br>";	
 		}
-		echo $ansNumbring;
-		echo "<br/>";
-		echo $ansOrientation;
 	}
-	echo '<br/><input type="button" value="Go Back" onclick="history.go(-1)"><br/>';
 ?>

@@ -1,13 +1,12 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Multiple Choice</title>
-	<script type="text/javascript">
+
 </head>
 
 <h2>Multiple Choice Question</h2>
-<?php
-	
-?>
 	<body onload = "window.open('', '_self', '')">
 
 	
@@ -56,7 +55,7 @@
 		
 			<?php
 			$numOptions = "";
-			
+
 			if(array_key_exists('submit',$_POST)){
 				$numOptions = $_POST['numOptions'];
 				echo "<input type = 'hidden' value = '$numOptions' name = 'numOptions'/>";
@@ -68,7 +67,7 @@
 				<br/>
 				";
 			}
-			
+
 				for($i=2;$i<=$numOptions;$i++) {
 					$option = 'Option'.$i;
 					echo $option;
@@ -77,7 +76,7 @@
 					echo $feedback;
 					echo "<input type = 'text' name = '$feedback'/>";
 					echo '<br/>';
-					
+
 				}
 			?>
 		</td>
