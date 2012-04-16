@@ -2,6 +2,17 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+	Author: Tom Jones
+	Date:12/04/2010
+	last edit:12/04/2012
+	edited by: Tom jones
+	purpose of script:to save a scenario to the database,
+						to allow creation of questions for a scenario
+							links to edit pages for each type of questions
+						to select master prescription for the scenario
+						
+-->
 	<style>
 	#container{
 	position:absolute;
@@ -66,7 +77,10 @@
 	<head>
 		
 		<title> Scenario Creator</title>	
-		<script type="text/javascript" language="javascript">  
+		<script type="text/javascript" language="javascript">
+		//Purpose: to save questions to database
+		//params $Qtype: type of question
+		//		$Qtext: the question string
 			function saveQuestion($Qtype ,$Qtext ){
 				    {//ajax
 						var xmlhttp;
@@ -89,6 +103,7 @@
 					}
 					
 			}
+			//purpose: link to editor script/page
 			function editQuestion(Qtype){
 				switch(Qtype){
 				case "Multiple_choice" : alert("Multiple_choice load"); //window.open("test.php");
@@ -98,7 +113,7 @@
 				default: alert("error");
 				}
 			}
-			
+			//purpose: to create the form for overview of each question
 			function createform(){
 				var selection = document.getElementById("questionType");
 				var selectionText = selection[selection.selectedIndex].text;
@@ -116,7 +131,7 @@
 			
 			return $form;
 			}
-			
+			//purpose:to display overview form for a question 
 			function questionCreate() {       
 			var createQform = document.createElement("div");
 			createQform.id = "Qformdiv";
@@ -155,6 +170,7 @@
 		</div>
 		 <div id = "questionForm">
 		 <!-- something to display question form(s)-->
+		 <!-- content dynamically added-->
 		 <!-- end questions forms-->
 		 </div>
 		 <div id= "addQuestionForm">
