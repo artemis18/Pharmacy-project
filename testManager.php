@@ -40,18 +40,28 @@ overflow: auto;
 padding: 5px;
 margin: 5px;
 }
-</style>
-<head> 
-	<link rel="stylesheet" type="text/css" href="style.css"/>
-	<title> Test Manager</title>
-	<script type="text/javascript" src ="script.js"></script>
-</head>
 
+</style>
+
+<head> 
+	
+	
+	<script type="text/javascript" src ="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="mystyle.css" />
+</head>
+<title> Test Manager</title>
 <body>
-<h1> Test Manager </h1>
-<p>Welcome to the Test Manager.<br/>
-<b>Instructions: </b>From here you can either create a test
-from existing questions, create a new test or remove a test </p>
+
+
+<div class = "banner"></div>
+<a class = "heading">Test Manager</a>
+<div class = "intro">Welcome to the Test Manager.<br/>
+From here you can either create a test
+from existing questions, create a new test or remove a test</div>
+
+<div><hr size=1 align="left" color="black"></div>
+	
+	
 <div id="container"> 
 <form action = "testScenarioManager.php" style ="float: left;" name="publishedTest" method = "POST">
 
@@ -64,7 +74,7 @@ Published Tests <br/>
 	echo "<br/>";
 	//Creating a multi select option bar and adding scenario names
 	echo '<select style="vertical-align: top; width: 200px;" size="15" name="testList" multiple="single">';
-	echo "<option value= 'No Test Selected' selected = 'selected'> Select a test </option>";
+	echo "<option value= 'Blank Test' selected = 'selected'> Create a blank test </option>";
 	while($row = mysql_fetch_array($result)){
 	//Getting the scenarioID
 	$testID = $row['testID'];
@@ -88,7 +98,7 @@ Unpublished Tests <br/>
 	echo "<br/>";
 	//Creating a multi select option bar and adding scenario names
 	echo '<select style="vertical-align: top; width: 200px;" size="15" name="testList" multiple="single">';
-	echo "<option value= 'No Test Selected' selected = 'selected'> Select a test </option>";
+	echo "<option value= 'Blank Test' selected = 'selected'> Create a blank test </option>";
 	while($row = mysql_fetch_array($result)){
 	//Getting the scenarioID
 	$testID = $row['testID'];
