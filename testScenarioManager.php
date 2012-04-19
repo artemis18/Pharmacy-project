@@ -16,7 +16,7 @@
 	//Declaring a variable to store the current test.
 	$currentTest;
 	//Saving the session to the currentTest if the 'testSelection' button is pressed and a test is selected from the 'testList'
-	if(array_key_exists('testSelection',$_POST) && array_key_exists('testList',$_POST)){
+	if(array_key_exists('testSelection',$_POST) || array_key_exists('testList',$_POST)){
 		$currentTest = $_POST['testList'];
 		$_SESSION['testList'] = $currentTest;
 	}		
@@ -53,6 +53,12 @@
 		
 	}
 	
+	function removeScenario(){
+		//A confirmation for the user before they delete a scenario from database.
+		return confirm("This scenario will be removed from the database. Continue?"); 
+		
+	}
+	
 	function help1(){
 		myWindow=window.open("","","width=500,height=100");
 		myWindow.document.write("<b>To edit</b> test name or description, change the test name or description and<br/> <b>click save test</b> or <b>Save and Exit</b> to exit at the same time.<br/> Create new test by clicking on 'CreateNewTest'");
@@ -62,13 +68,31 @@
 		myWindow=window.open("","","width=500,height=300");
 		myWindow.document.write("This section is about adding or removing a scenario to this test. (the one selected by you from the Test Manager).<br/><br/><b>Published Scenarios</b>: These are the scenarios which already exist in one or more tests.<br/><b>UnPublished Scenarios</b>: These scenarios are not linked to any tests.<br/><b>Scenarios For This Test</b>: These scenarios are linked to this perticular test.<br/><br/>To <b>add</b> a published or unpublished scenario to this test, select one from the list and click add. <br/>To remove a scenario from this test, select one from the list 'Scenarios For This Test' and click <b>Remove</b>.");
 	}
+	
+	function modifyScenario()
+	{
+		document.myform.action ="scenarioCreator.php";
+		document.myform.method ="POST";
+		document.myform.target ="_self";
+		document.myform.submit();             
+	}
+	
 	</script>
+	<link rel="stylesheet" type="text/css" href="mystyle.css" />
     </head>
 	
 
-<h1>Test Modification</h1>
 
-<body>
+	<body onload = "window.open('', '_self', '')">
+	<div class = "banner"></div>
+	
+	<a class = "heading">Test Modification</a>
+	<div class = "intro">
+	Welcome to the Test Modifier.
+	This page allows you to edit test details and create a new test. <br/>You can also remove, modify and add a new scenario to the test.</div>
+	<div><hr size=1 align="left" color="black"></div>
+	
+
 	<table border = "0" style="background-color: #EBF0EB">
 	<tr>
 	
@@ -91,16 +115,16 @@
 	</td></tr>
 	
 	
-	<form action = "testScenarioManager.php" method = "POST" >
+	<form action = "testScenarioManager.php" method = "POST" name = "myform">
 	<?php 
-		//
+		
 		echo "<tr><td colspan = '3'><label>Test Name<input type = 'text' value = '$testName' size ='97' name = 'testName' id = 'test'/></label></td></tr>";
 		echo "<tr><td colspan = '3'><label>Test Description<input type = 'text' value = '$testDescription' name = 'testDescription' id = 'description' size = '92'/></label>"; 
 	?>
 	
 	</td></tr>
-	<tr><td colspan = '3'>
-	<p align = "center">
+	<tr><td colspan = '3' align = "center">
+	
 	
 	<input type = "submit" name = "saveTest" value = "Save Test"/>
 	<input type = "submit" name = "saveExitTest" value = "Save and Exit"/>
@@ -146,15 +170,14 @@
 			echo "</select>";
 		?>
 		<p align = "center"><input type = "submit" name = "addScenario" value ="Add"/>
-					   <input type = "submit" name = "removeUnPublished" value ="Remove"/></p>
-	
-	
+		
+		<input type = "submit" name = "removeUnPublished" value ="Remove" disabled = "true"/></p>
 	</td>
 	<td><b>Scenarios for this Test<br/></b>
 	<?php
 		//This script retrieves all the scenarios which are linked to this perticualr test
 		$result = mysql_query("select * from scenario,scenario_collection where scenario_collection.testID = '$currentTest' AND scenario_collection.ScenarioID = scenario.ScenarioID;");
-
+		$count = mysql_num_rows($result);
 		//Creating a multi select option bar and adding scenario names
 			echo '<select style="vertical-align: top; width: 200px;" size="10" name="testScenarios" multiple="single">';
 			while($row = mysql_fetch_array($result)) {
@@ -166,10 +189,23 @@
 			echo "</select>";
 		?>
 	
-	<p align = "center"><input type = "button" name = "modifyScenario" value ="Modify" disabled = "true"/>
-						<input type = "submit" name = "removeFromTest" value ="Remove"/></p>
-	</td>
+		<p align = "center">
+		
+		<?php
+			if($count == 0){
+			echo '<input type = "button" name = "modify" value = "Modify" onclick = "modifyScenario()" disabled = "true"/>';
+			echo '<input type = "button" name = "removeFromTest" value ="Remove" disabled = "true"/>';
+		}
+		else{
+			echo '<input type = "button" name = "modify" value = "Modify" onclick = "modifyScenario()"/>';
+			echo '<input type = "submit" name = "removeFromTest" value ="Remove" />';
+
+		}
+		?>
+		</p>
 	</form>
+	</td>
+	
 </table>
 <br/>
 	<?php
@@ -203,7 +239,7 @@
 			echo "Select a scenario from the <b>current test</b> before clicking the 'Remove' button.";
 		}
 
-
+		
 		//Removing an unpublished scenario 
 		if(array_key_exists('removeUnPublished',$_POST) && array_key_exists('unPubScenarios',$_POST)){
 			$selectedUnPublished = $_POST['unPubScenarios'];
@@ -215,6 +251,7 @@
 		elseif(array_key_exists('removeUnPublished',$_POST)){
 			echo "Select a scenario from the <b>unpublished scenarios</b> before clicking the 'Remove' button.";
 		}
+		
 		
 		//Checking if the scenario is already in the test and add if not
 		function compareAdd($selectedScenario, $currentTest){

@@ -3,15 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Multiple Choice</title>
-
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 </head>
 
-<h2>Multiple Choice Question</h2>
-	<body onload = "window.open('', '_self', '')">
 
+	<body onload = "window.open('', '_self', '')">
+	<div class = "banner"></div>
 	
+	<a class = "heading">Multiple Choice Question</a>
+	<div class = "intro">
+	Here you can add/edit multiple choice questions. Start by selecting number of options first.</div>
+	<div><hr size=1 align="left" color="black"></div>
 	
 	<table border = '0' style="background-color: #EBF0EB">
+	
 	<tr><td colspan = "5">
 		<form action = 'multipleChoice.php' method = 'POST'>
 			<b>Possible Number of Options:</b><select name = 'numOptions'>
