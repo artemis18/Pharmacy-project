@@ -1,0 +1,1 @@
+<a href="/prescription/index.php">Home</a><a href="?page=student_acc">My Account</a><a href="?page=student_tests">Tests</a><a href="?page=student_feedback">Feedback</a><a href="control/logout.php">Logout</a>
