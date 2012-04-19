@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2012 at 12:28 PM
+-- Generation Time: Apr 04, 2012 at 12:06 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -67,9 +67,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `questionText` varchar(255) NOT NULL,
   `feedBackText` text NOT NULL,
   `questionID` int(11) unsigned NOT NULL,
-  `marks` int(2) unsigned NOT NULL,
-  PRIMARY KEY (`questionID`),
-  KEY `ScenarioID` (`ScenarioID`)
+  `marks` int(2) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -87,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `scenario` (
   `published` enum('yes','no') NOT NULL,
   PRIMARY KEY (`ScenarioID`),
   KEY `ScenarioTypeID` (`ScenarioTypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `scenario`
@@ -97,8 +95,7 @@ INSERT INTO `scenario` (`ScenarioID`, `scenarioName`, `ScenarioTypeID`, `Feedbac
 (2, 'TomsFirstScenario', 1, 'some scenario feedback for pondering.', 100, 'yes'),
 (3, 'TomsSecondScenario', 1, 'the feedback that tells you how to win.', 33, 'no'),
 (4, 'TomsThirdScenario', 2, 'The feedback you need to pass at life.', 33, 'yes'),
-(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'yes'),
-(7, 'Unpublished Scenario1', 2, 'Some feedback about the scenario...', 33, 'no');
+(5, 'PuravsFirstScenario', 2, 'Feedback...', 100, 'yes');
 
 -- --------------------------------------------------------
 
@@ -120,7 +117,8 @@ CREATE TABLE IF NOT EXISTS `scenario_collection` (
 INSERT INTO `scenario_collection` (`ScenarioID`, `testID`) VALUES
 (4, 4),
 (5, 2),
-(2, 3);
+(2, 3),
+(4, 7);
 
 -- --------------------------------------------------------
 
@@ -161,17 +159,21 @@ CREATE TABLE IF NOT EXISTS `test` (
   `testTypeID` int(11) NOT NULL,
   PRIMARY KEY (`testID`),
   KEY `creatorID` (`creatorID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `test`
 --
 
 INSERT INTO `test` (`testID`, `testName`, `description`, `creatorID`, `creationTimeStamp`, `releaseTime`, `expiray time`, `Feedback`, `testTypeID`) VALUES
-(2, 'TomsFirstTest', 'This test is about Unit10. Here you will be able to...', 1, '2012-03-16 12:18:24', NULL, NULL, 'Test Feedback is this feedback of the test.', 0),
-(3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on the questions such as...', 1, '2012-03-16 12:19:48', NULL, NULL, 'feedback for second test', 0),
-(4, 'PuravsFirstTest', 'This test is about Unit9. Here you will be tested on the questions such as...', 1, '2012-03-16 12:20:06', '2012-03-09 00:00:00', '2012-03-16 00:00:00', 'Feedback....', 1),
-(5, 'PuravsSecondTest', 'This test is about Unit7. Here you will be tested on the questions such as...', 2, '2012-03-16 12:20:39', NULL, NULL, 'Feedback..', 0);
+(2, 'TomsFirstTest', 'this test is about unit3', 1, '2012-03-19 15:00:53', NULL, NULL, 'Test Feedback is this feedback of the test..', 0),
+(3, 'TomsSecondTest', 'This test is about Unit12. Here you will be tested on...', 1, '2012-03-16 13:40:30', NULL, NULL, 'feedback for second test', 0),
+(4, 'PuravsFirstTest', 'This test is about Unit9. The student will be tested on...', 1, '2012-03-16 13:49:02', '2012-03-09 00:00:00', '2012-03-16 00:00:00', 'Feedback....', 1),
+(5, 'PuravsSecondTest', 'This test is about Unit7. Here you will be tested on the questions such as...', 2, '2012-03-16 12:20:39', NULL, NULL, 'Feedback..', 0),
+(6, 'test1', 'des1', 2, '2012-03-19 11:35:37', NULL, NULL, '', 0),
+(7, 'sw test', 'jgjg', 2, '2012-03-19 11:37:07', NULL, NULL, '', 0),
+(8, 'sw test', 'this test is about unit3', 2, '2012-03-19 13:25:50', NULL, NULL, '', 0),
+(9, 'puravs new test', 'this test is about...', 1, '2012-04-02 12:01:24', '2012-05-18 00:00:00', '2012-04-02 00:00:00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -215,12 +217,6 @@ INSERT INTO `test_type` (`Type`, `TypeID`) VALUES
 --
 ALTER TABLE `completed_test`
   ADD CONSTRAINT `completed_test_ibfk_1` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `question`
---
-ALTER TABLE `question`
-  ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`ScenarioID`) REFERENCES `scenario` (`ScenarioID`);
 
 --
 -- Constraints for table `scenario`
